@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyMarvelApp</string>
+    <string name="last_week_display">Last week display</string>
+    <string name="date">on sale date : </string>
 </resources>

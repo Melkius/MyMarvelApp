@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyMarvelApp</string>
+    <string name="last_week_display">Nouveautés de la semaine</string>
+    <string name="date">date de sortie : </string>
+</resources>
