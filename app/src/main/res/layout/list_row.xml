@@ -22,10 +22,24 @@
             android:src="@drawable/ic_launcher_background"/>
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/copyright"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/thumbnail"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:maxLines="3"
+            android:padding="8dp"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/copyright"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
             android:maxLines="3"
