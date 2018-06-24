@@ -35,8 +35,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         // Using Picasso to fill the ImageView
         if (!TextUtils.isEmpty(comicItem.getThumbnail())) {
             Picasso.get().load(comicItem.getThumbnail())
-                    .error(R.drawable.ic_launcher_background)
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.marvel_logo)
+                    .placeholder(R.drawable.marvel_logo)
                     .into(customViewHolder.imageView);
         }
 

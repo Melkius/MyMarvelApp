@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">MyMarvelApp</string>
-    <string name="last_week_display">Last week display</string>
-    <string name="date">on sale date : </string>
+    <string name="last_week_display">Week latest issues</string>
+    <string name="date">On sale date : </string>
     <string name="FailedFetch">Failed to fetch data!</string>
+    <string name="Waiting">Please wait ...</string>
+    <string name="Web_site">More information on Marvel.com</string>
+    <string name="creators">Creators :</string>
+    <string name="comic_picture">Comic Picture</string>
+    <string name="diamondcode">DiamondCode :</string>
+    <string name="copyright_marvel">copyright Marvel</string>
 </resources>

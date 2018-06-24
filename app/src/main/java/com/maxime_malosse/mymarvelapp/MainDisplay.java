@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -32,6 +33,7 @@ public class MainDisplay extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private MyRecyclerViewAdapter adapter;
     private ProgressBar progressBar;
+    private TextView waiting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class MainDisplay extends AppCompatActivity {
 
         // Initiating
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        waiting = (TextView) findViewById(R.id.tvWaiting);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
@@ -53,6 +56,7 @@ public class MainDisplay extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            waiting.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -86,6 +90,7 @@ public class MainDisplay extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer result) {
+            waiting.setVisibility(View.INVISIBLE);
             progressBar.setVisibility(View.GONE);
 
             if (result == 1) {
@@ -152,7 +157,7 @@ public class MainDisplay extends AppCompatActivity {
                 JSONArray images = post.getJSONArray("images");
                 Log.d(TAG, "IMAGES : " + images.toString());
                 JSONObject image = images.optJSONObject(0);
-                item.setThumbnail(image.optString("path")+"/landscape_xlarge.jpg");
+                item.setThumbnail(image.optString("path")+"/landscape_incredible.jpg");
                 Log.d(TAG, "IMAGE : " + image.toString());
 
                 item.setTitle(post.optString("title"));

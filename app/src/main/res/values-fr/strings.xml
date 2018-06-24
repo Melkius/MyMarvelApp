@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">MyMarvelApp</string>
-    <string name="last_week_display">Nouveautés de la semaine</string>
-    <string name="date">date de sortie : </string>
+    <string name="last_week_display">Sorties de la semaine</string>
+    <string name="date">Date de sortie : </string>
     <string name="FailedFetch">Impossible de récupérer les données !</string>
+    <string name="Waiting">Patientez s\'il vous plait ...</string>
+    <string name="Web_site">Plus d\'info sur Marvel.com</string>
+    <string name="creators">Créateurs :</string>
+    <string name="comic_picture">Image du Comic</string>
+    <string name="diamondcode">DiamondCode :</string>
 </resources>
