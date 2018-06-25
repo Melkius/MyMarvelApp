@@ -7,18 +7,32 @@
     tools:context=".DetailDisplay"
     tools:layout_editor_absoluteY="25dp">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_scrollFlags="scroll|enterAlways" />
+
     <ImageView
         android:id="@+id/ivComic"
         android:layout_width="297dp"
-        android:layout_height="236dp"
+        android:layout_height="230dp"
         android:layout_marginBottom="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:contentDescription="@string/comic_picture"
         android:onClick="onClickWebSite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         app:srcCompat="@android:color/transparent" />
 
     <TextView
@@ -33,14 +47,15 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/tvDiamondCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="2dp"
         android:fontFamily="@font/marvel"
         android:textStyle="bold"
@@ -60,18 +75,21 @@
         app:layout_constraintStart_toEndOf="@+id/ivComic"
         app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
-    <TextView
+    <Button
         android:id="@+id/tvWebSite"
-        android:layout_width="242dp"
-        android:layout_height="22dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="12dp"
+        style="@android:style/Widget.Material.Light.Button.Inset"
+        android:layout_width="181dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/marvel_color"
         android:fontFamily="@font/marvel"
         android:onClick="onClickWebSite"
         android:text="@string/Web_site"
-        android:textAlignment="textEnd"
-        android:textColor="@android:color/holo_red_dark"
-        android:textStyle="italic"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -92,13 +110,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/marvel"
         android:text="@string/creators"
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/ivComic"
-        app:layout_constraintTop_toBottomOf="@+id/tvWebSite" />
+        app:layout_constraintTop_toTopOf="@+id/tvWebSite" />
 
     <ScrollView
         android:id="@+id/scrollView2"

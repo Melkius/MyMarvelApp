@@ -6,10 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".DetailDisplay">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <ImageView
         android:id="@+id/ivComic"
         android:layout_width="0dp"
         android:layout_height="250dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/comic_picture"
         android:onClick="onClickWebSite"
@@ -31,15 +47,16 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/tvDiamondCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/marvel"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,22 +75,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
-    <TextView
+    <Button
         android:id="@+id/tvWebSite"
-        android:layout_width="242dp"
-        android:layout_height="22dp"
+        style="@android:style/Widget.Material.Light.Button.Inset"
+        android:layout_width="181dp"
+        android:layout_height="26dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/marvel_color"
         android:fontFamily="@font/marvel"
         android:onClick="onClickWebSite"
         android:text="@string/Web_site"
-        android:textAlignment="textEnd"
-        android:textColor="@android:color/holo_red_dark"
-        android:textStyle="italic"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/tvDate"
@@ -98,7 +116,7 @@
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvWebSite" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -107,13 +125,13 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="#1ee70000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWebSite">
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"

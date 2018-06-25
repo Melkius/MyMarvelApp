@@ -1,10 +1,13 @@
 package com.maxime_malosse.mymarvelapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,13 +26,54 @@ public class DetailDisplay extends AppCompatActivity {
     private TextView creatorsView;
     private TextView copyright;
     private String url;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_display);
 
+        // Initializing ToolBar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        ImageView back = new ImageView(this);
+        back.setImageResource(R.mipmap.ic_back2);
+        Toolbar.LayoutParams param1 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        param1.gravity = Gravity.END;
+        back.setLayoutParams(param1);
+        toolbar.addView(back);
+
+        ImageView share = new ImageView(this);
+        share.setImageResource(R.mipmap.ic_share);
+        Toolbar.LayoutParams param2 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        param2.gravity = Gravity.END;
+        param2.rightMargin = 20;
+        share.setLayoutParams(param2);
+        toolbar.addView(share);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "Sharing URL");
+                i.putExtra(Intent.EXTRA_TEXT, url);
+                startActivity(Intent.createChooser(i, "Share Comics"));
+            }
+        });
+
         // Initialising Views
+
         title = (TextView) findViewById(R.id.tvTitle);
         date = (TextView) findViewById(R.id.tvDate);
         diamondCode = (TextView) findViewById(R.id.tvDiamondCode);

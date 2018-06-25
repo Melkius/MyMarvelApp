@@ -1,14 +1,18 @@
 package com.maxime_malosse.mymarvelapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,13 +38,44 @@ public class MainDisplay extends AppCompatActivity {
     private MyRecyclerViewAdapter adapter;
     private ProgressBar progressBar;
     private TextView waiting;
+    private Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_display);
 
-        // Initiating
+        // Initializing ToolBar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        ImageView back = new ImageView(this);
+        back.setImageResource(R.mipmap.ic_back2);
+        Toolbar.LayoutParams param1 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        param1.gravity = Gravity.END;
+        back.setLayoutParams(param1);
+        toolbar.addView(back);
+
+        TextView title = new TextView(this);
+        title.setText(R.string.last_week_display);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(25f);
+        Toolbar.LayoutParams param3 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        param3.gravity = Gravity.CENTER;
+        title.setLayoutParams(param3);
+        toolbar.addView(title);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        // Initializing
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         waiting = (TextView) findViewById(R.id.tvWaiting);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
