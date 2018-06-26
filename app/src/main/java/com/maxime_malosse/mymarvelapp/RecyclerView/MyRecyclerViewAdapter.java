@@ -1,4 +1,4 @@
-package com.maxime_malosse.mymarvelapp;
+package com.maxime_malosse.mymarvelapp.RecyclerView;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.maxime_malosse.mymarvelapp.JobClasses.ComicItem;
+import com.maxime_malosse.mymarvelapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

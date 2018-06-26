@@ -9,7 +9,7 @@
     android:theme="@style/AppTheme"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    tools:context="com.maxime_malosse.mymarvelapp.MainDisplay"
+    tools:context="com.maxime_malosse.mymarvelapp.Activities.MainDisplay"
     tools:layout_editor_absoluteY="-17dp">
 
     <android.support.v7.widget.Toolbar

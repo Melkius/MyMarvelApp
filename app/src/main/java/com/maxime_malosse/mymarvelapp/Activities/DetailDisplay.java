@@ -1,4 +1,4 @@
-package com.maxime_malosse.mymarvelapp;
+package com.maxime_malosse.mymarvelapp.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.maxime_malosse.mymarvelapp.JobClasses.Creators;
+import com.maxime_malosse.mymarvelapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.Iterator;
@@ -34,6 +36,49 @@ public class DetailDisplay extends AppCompatActivity {
         setContentView(R.layout.activity_detail_display);
 
         // Initializing ToolBar
+        initToolbar();
+
+        // Initializing Views
+        initViews();
+
+        // Grab Intent extra data and filling Views
+        Intent intent = getIntent();
+        title.setText(intent.getStringExtra("title"));
+        date.setText(intent.getStringExtra("date"));
+        diamondCode.setText(intent.getStringExtra("diamondCode"));
+        copyright.setText(intent.getStringExtra("copyright"));
+        url = intent.getStringExtra("webSite");
+        List<Creators> creatorsList = (List<Creators>) intent.getSerializableExtra("creators");
+
+        // Using Picasso to fill the ImageView
+        if (!TextUtils.isEmpty(intent.getStringExtra("thumbnail"))) {
+            Picasso.get().load(intent.getStringExtra("thumbnail"))
+                    .error(R.drawable.ic_launcher_background)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .into(image);
+        }
+
+        // creating Iterator for the creatorsList
+        Iterator<Creators> iter = creatorsList.iterator();
+
+        // Filling Creators View
+        while(iter.hasNext()){
+            Creators creators;
+            creators = iter.next();
+            creatorsView.append("- " + creators.getName() + "\n");
+            creatorsView.append("    " + creators.getRole() + "\n");
+            creatorsView.append("\n");
+        }
+    }
+
+    // Redirection method to the Marvel webSite
+    public void onClickWebSite(View view) {
+        Uri uri = Uri.parse(url);
+        Intent intentWeb = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intentWeb);
+    }
+
+    public void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
@@ -71,50 +116,14 @@ public class DetailDisplay extends AppCompatActivity {
                 startActivity(Intent.createChooser(i, "Share Comics"));
             }
         });
+    }
 
-        // Initialising Views
-
+    public void initViews(){
         title = (TextView) findViewById(R.id.tvTitle);
         date = (TextView) findViewById(R.id.tvDate);
         diamondCode = (TextView) findViewById(R.id.tvDiamondCode);
         image = (ImageView) findViewById(R.id.ivComic);
         creatorsView = (TextView) findViewById(R.id.tvCreators);
         copyright =(TextView) findViewById(R.id.tvCopyright);
-
-        // Grab Intent extra data and filling Views
-        Intent intent = getIntent();
-        title.setText(intent.getStringExtra("title"));
-        date.setText(intent.getStringExtra("date"));
-        diamondCode.setText(intent.getStringExtra("diamondCode"));
-        copyright.setText(intent.getStringExtra("copyright"));
-        url = intent.getStringExtra("webSite");
-        List<Creators> creatorsList = (List<Creators>) intent.getSerializableExtra("creators");
-
-        // Using Picasso to fill the ImageView
-        if (!TextUtils.isEmpty(intent.getStringExtra("thumbnail"))) {
-            Picasso.get().load(intent.getStringExtra("thumbnail"))
-                    .error(R.drawable.ic_launcher_background)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(image);
-        }
-
-        // creating Iterator for the creatorsList
-        Iterator<Creators> iter = creatorsList.iterator();
-
-        // Filling Creators View
-        while(iter.hasNext()){
-            Creators creators;
-            creators = iter.next();
-            creatorsView.append("- " + creators.getName() + "\n");
-            creatorsView.append("    " + creators.getRole() + "\n");
-            creatorsView.append("\n");
-        }
-    }
-
-    // Redirection method to the Marvel webSite
-    public void onClickWebSite(View view) {
-        Uri uri = Uri.parse(url);
-        Intent intentWeb = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intentWeb);
     }
 }

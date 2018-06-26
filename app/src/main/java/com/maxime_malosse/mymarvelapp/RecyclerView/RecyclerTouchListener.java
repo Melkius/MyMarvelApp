@@ -1,4 +1,4 @@
-package com.maxime_malosse.mymarvelapp;
+package com.maxime_malosse.mymarvelapp.RecyclerView;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

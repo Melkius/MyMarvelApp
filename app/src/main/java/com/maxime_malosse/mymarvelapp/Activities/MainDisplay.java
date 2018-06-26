@@ -1,4 +1,4 @@
-package com.maxime_malosse.mymarvelapp;
+package com.maxime_malosse.mymarvelapp.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +16,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.maxime_malosse.mymarvelapp.JobClasses.ComicItem;
+import com.maxime_malosse.mymarvelapp.JobClasses.Creators;
+import com.maxime_malosse.mymarvelapp.R;
+import com.maxime_malosse.mymarvelapp.RecyclerView.MyRecyclerViewAdapter;
+import com.maxime_malosse.mymarvelapp.RecyclerView.RecyclerTouchListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +45,7 @@ public class MainDisplay extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView waiting;
     private Toolbar toolbar;
+    private static final String url = "https://gateway.marvel.com:443/v1/public/comics?format=comic&dateDescriptor=lastWeek&ts=1524161673&apikey=2fb3c607374cd614f32c819c48e9db0c&hash=4da7ecb9bd380ff6092e35da2a123cc7";
 
 
     @Override
@@ -47,42 +54,14 @@ public class MainDisplay extends AppCompatActivity {
         setContentView(R.layout.activity_main_display);
 
         // Initializing ToolBar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        ImageView back = new ImageView(this);
-        back.setImageResource(R.mipmap.ic_back2);
-        Toolbar.LayoutParams param1 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
-        param1.gravity = Gravity.END;
-        back.setLayoutParams(param1);
-        toolbar.addView(back);
-
-        TextView title = new TextView(this);
-        title.setText(R.string.last_week_display);
-        title.setTextColor(Color.WHITE);
-        title.setTextSize(25f);
-        Toolbar.LayoutParams param3 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
-        param3.gravity = Gravity.CENTER;
-        title.setLayoutParams(param3);
-        toolbar.addView(title);
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        initToolbar();
 
         // Initializing
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        waiting = (TextView) findViewById(R.id.tvWaiting);
+        initViews();
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
-        String url = "https://gateway.marvel.com:443/v1/public/comics?format=comic&dateDescriptor=lastWeek&ts=1524161673&apikey=2fb3c607374cd614f32c819c48e9db0c&hash=4da7ecb9bd380ff6092e35da2a123cc7";
         // launching the AsynchTask
         new DownloadTask().execute(url);
     }
@@ -173,8 +152,6 @@ public class MainDisplay extends AppCompatActivity {
             // the whole block of data
             JSONObject datas = response.optJSONObject("data");
             Log.d(TAG, datas.toString());
-
-
             JSONArray results = datas.optJSONArray("results");
             Log.d(TAG, results.toString());
 
@@ -215,13 +192,49 @@ public class MainDisplay extends AppCompatActivity {
                     creatorEach.setRole(items.getJSONObject(j).getString("role"));
                     creatorsList.add(creatorEach);
                 }
-                item.setCreators(creatorsList);
 
+                item.setCreators(creatorsList);
                 feedsList.add(item);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void initToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        ImageView back = new ImageView(this);
+        back.setImageResource(R.mipmap.ic_back2);
+        Toolbar.LayoutParams param1 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        param1.gravity = Gravity.END;
+        back.setLayoutParams(param1);
+        toolbar.addView(back);
+
+        TextView title = new TextView(this);
+        title.setText(R.string.last_week_display);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(25f);
+        Toolbar.LayoutParams param3 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        param3.gravity = Gravity.CENTER;
+        title.setLayoutParams(param3);
+        toolbar.addView(title);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initViews() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        waiting = (TextView) findViewById(R.id.tvWaiting);
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
     }
 
 }
