@@ -218,6 +218,7 @@ public class MainDisplay extends AppCompatActivity {
         title.setText(R.string.last_week_display);
         title.setTextColor(Color.WHITE);
         title.setTextSize(25f);
+        title.setShadowLayer(5f, 4, 4, Color.BLACK);
         Toolbar.LayoutParams param3 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
         param3.gravity = Gravity.CENTER;
         title.setLayoutParams(param3);
