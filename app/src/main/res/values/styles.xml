@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/marvel_color</item>
     </style>
 
+    <style name="MarvelToolbar">
+        <item name="android:fontFamily">@font/marvel_bold_italic</item>
+        <item name="android:textColor">@color/marvel_dark_yellow</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 </resources>

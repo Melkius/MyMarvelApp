@@ -7,4 +7,8 @@
     <color name="marvel_grey">#e9e9e9</color>
     <color name="marvel_light_red">#dcddc8c8</color>
     <color name="marvel_yellow">#ffed2b</color>
+    <color name="marvel_orange">#f78800</color>
+    <color name="marvel_orange_light">#dee7a655</color>
+    <color name="marvel_dark_yellow">#e7d400</color>
+
 </resources>

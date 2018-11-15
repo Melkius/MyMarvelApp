@@ -1,6 +1,7 @@
 package com.maxime_malosse.mymarvelapp.Activities;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ public class DetailDisplay extends AppCompatActivity {
     private TextView copyright;
     private String url;
     private Toolbar toolbar;
+    private String landscape_thumbnail;
+    private String portrait_thumbnail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +54,30 @@ public class DetailDisplay extends AppCompatActivity {
         List<Creators> creatorsList = (List<Creators>) intent.getSerializableExtra("creators");
 
         // Using Picasso to fill the ImageView
-        if (!TextUtils.isEmpty(intent.getStringExtra("thumbnail"))) {
-            Picasso.get().load(intent.getStringExtra("thumbnail"))
-                    .error(R.drawable.ic_launcher_background)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(image);
+
+        landscape_thumbnail = intent.getStringExtra("thumbnail");
+        portrait_thumbnail = intent.getStringExtra("vertical_thumbnail");
+
+        int orientation;
+        orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (!TextUtils.isEmpty(landscape_thumbnail)) {
+                Picasso.get().load(landscape_thumbnail)
+                        .error(R.drawable.ic_launcher_background)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .into(image);
+            }
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            if (!TextUtils.isEmpty(portrait_thumbnail)) {
+                Picasso.get().load(portrait_thumbnail)
+                        .resize(150, 230)
+                        .centerInside()
+                        .error(R.drawable.ic_launcher_background)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .into(image);
+            }
         }
+
 
         // creating Iterator for the creatorsList
         Iterator<Creators> iter = creatorsList.iterator();
@@ -80,22 +101,23 @@ public class DetailDisplay extends AppCompatActivity {
 
     public void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(Color.YELLOW);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         ImageView back = new ImageView(this);
-        back.setImageResource(R.mipmap.ic_back2);
-        Toolbar.LayoutParams param1 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        back.setImageResource(R.drawable.back_selector);
+        Toolbar.LayoutParams param1 = new Toolbar.LayoutParams(80, 80);
         param1.gravity = Gravity.END;
+        param1.rightMargin = 25;
         back.setLayoutParams(param1);
         toolbar.addView(back);
 
         ImageView share = new ImageView(this);
-        share.setImageResource(R.mipmap.ic_share);
-        Toolbar.LayoutParams param2 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        share.setImageResource(R.drawable.share_selector);
+        Toolbar.LayoutParams param2 = new Toolbar.LayoutParams(83, 83);
         param2.gravity = Gravity.END;
-        param2.rightMargin = 20;
+        param2.rightMargin = 35;
         share.setLayoutParams(param2);
         toolbar.addView(share);
 
@@ -125,5 +147,27 @@ public class DetailDisplay extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.ivComic);
         creatorsView = (TextView) findViewById(R.id.tvCreators);
         copyright =(TextView) findViewById(R.id.tvCopyright);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (!TextUtils.isEmpty(portrait_thumbnail)) {
+                Picasso.get().load(portrait_thumbnail)
+                        .resize(150, 230)
+                        .centerInside()
+                        .error(R.drawable.ic_launcher_background)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .into(image);
+            }
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (!TextUtils.isEmpty(landscape_thumbnail)) {
+                Picasso.get().load(landscape_thumbnail)
+                        .error(R.drawable.ic_launcher_background)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .into(image);
+            }
+        }
     }
 }

@@ -119,6 +119,7 @@ public class MainDisplay extends AppCompatActivity {
                         Intent intent = new Intent(MainDisplay.this, DetailDisplay.class);
                         intent.putExtra("title", item.getTitle());
                         intent.putExtra("thumbnail", item.getThumbnail());
+                        intent.putExtra("vertical_thumbnail", item.getVerticalThumbnail());
                         intent.putExtra("date", item.getDate());
                         intent.putExtra("creators", (Serializable) item.getCreators());
                         intent.putExtra("diamondCode", item.getDiamondCode());
@@ -170,6 +171,7 @@ public class MainDisplay extends AppCompatActivity {
                 Log.d(TAG, "IMAGES : " + images.toString());
                 JSONObject image = images.optJSONObject(0);
                 item.setThumbnail(image.optString("path")+"/landscape_incredible.jpg");
+                item.setVerticalThumbnail(image.optString("path")+"/portrait_incredible.jpg");
                 Log.d(TAG, "IMAGE : " + image.toString());
 
                 item.setTitle(post.optString("title"));
@@ -203,22 +205,23 @@ public class MainDisplay extends AppCompatActivity {
 
     public void initToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitleTextColor(Color.YELLOW);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         ImageView back = new ImageView(this);
-        back.setImageResource(R.mipmap.ic_back2);
-        Toolbar.LayoutParams param1 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+        back.setImageResource(R.drawable.back_selector);
+        Toolbar.LayoutParams param1 = new Toolbar.LayoutParams(80, 80);
         param1.gravity = Gravity.END;
+        param1.rightMargin = 25;
         back.setLayoutParams(param1);
         toolbar.addView(back);
 
         TextView title = new TextView(this);
+        title.setTextAppearance(R.style.MarvelToolbar);
         title.setText(R.string.last_week_display);
-        title.setTextColor(Color.WHITE);
         title.setTextSize(25f);
-        title.setShadowLayer(5f, 4, 4, Color.BLACK);
+        title.setShadowLayer(3f, 3, 3, Color.DKGRAY);
         Toolbar.LayoutParams param3 = new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
         param3.gravity = Gravity.CENTER;
         title.setLayoutParams(param3);

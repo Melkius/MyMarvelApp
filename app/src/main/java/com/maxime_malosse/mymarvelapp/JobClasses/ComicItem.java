@@ -11,6 +11,7 @@ public class ComicItem {
     private List<Creators> creators = new ArrayList<>();
     private String webSite;
     private String copyright;
+    private String verticalThumbnail;
 
     public String getTitle() {
         return title;
@@ -28,12 +29,22 @@ public class ComicItem {
         this.thumbnail = thumbnail;
     }
 
+    public String getVerticalThumbnail() {
+        return verticalThumbnail;
+    }
+
+    public void setVerticalThumbnail(String verticalThumnail) {
+        this.verticalThumbnail = verticalThumnail;
+    }
+
+
     // Date output format
     public String getDate() {
         String onSaleDate;
         onSaleDate = date.substring(0,27);
         return onSaleDate;
     }
+
 
     public void setDate(String date) { this.date = date; }
 
